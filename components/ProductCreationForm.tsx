@@ -26,13 +26,13 @@ export default function ProductCreationForm({ onProductCreated }: ProductCreatio
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Product Name"
-        className="mb-2 p-2 border rounded w-full"
+        className="w-full p-2 border rounded"
         required
       />
       <input
@@ -40,18 +40,18 @@ export default function ProductCreationForm({ onProductCreated }: ProductCreatio
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         placeholder="Price"
-        className="mb-2 p-2 border rounded w-full"
+        className="w-full p-2 border rounded"
         required
       />
       <select
         value={type}
         onChange={(e) => setType(e.target.value)}
-        className="mb-2 p-2 border rounded w-full"
+        className="w-full p-2 border rounded"
       >
         <option value="photo">Photo</option>
         <option value="video">Video</option>
       </select>
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">
+      <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Create Product
       </button>
     </form>

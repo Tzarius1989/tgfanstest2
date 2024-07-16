@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import ProductCreationForm from './ProductCreationForm'
 
-// Определите интерфейс для продукта
 interface Product {
   name: string;
   price: number;
@@ -17,13 +16,16 @@ export default function CreatorDashboard() {
   }
 
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-xl font-semibold mb-4">Your Products</h2>
-      {products.map((product, index) => (
-        <div key={index} className="mb-2 p-2 border rounded">
-          {product.name} - ${product.price}
-        </div>
-      ))}
+      <div className="space-y-2 mb-4">
+        {products.map((product, index) => (
+          <div key={index} className="p-2 border rounded">
+            <p className="font-semibold">{product.name}</p>
+            <p>${product.price.toFixed(2)} - {product.type}</p>
+          </div>
+        ))}
+      </div>
       <ProductCreationForm onProductCreated={handleProductCreated} />
     </div>
   )
