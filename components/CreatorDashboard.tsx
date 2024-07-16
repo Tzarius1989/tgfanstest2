@@ -2,10 +2,17 @@
 import { useState } from 'react'
 import ProductCreationForm from './ProductCreationForm'
 
-export default function CreatorDashboard() {
-  const [products, setProducts] = useState([])
+// Определите интерфейс для продукта
+interface Product {
+  name: string;
+  price: number;
+  type: string;
+}
 
-  const handleProductCreated = (newProduct) => {
+export default function CreatorDashboard() {
+  const [products, setProducts] = useState<Product[]>([])
+
+  const handleProductCreated = (newProduct: Product) => {
     setProducts([...products, newProduct])
   }
 

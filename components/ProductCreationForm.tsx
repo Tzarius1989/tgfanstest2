@@ -1,14 +1,24 @@
 "use client"
 import { useState } from 'react'
 
-export default function ProductCreationForm({ onProductCreated }) {
+interface Product {
+  name: string;
+  price: number;
+  type: string;
+}
+
+interface ProductCreationFormProps {
+  onProductCreated: (product: Product) => void;
+}
+
+export default function ProductCreationForm({ onProductCreated }: ProductCreationFormProps) {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [type, setType] = useState('photo')
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const newProduct = { name, price: parseFloat(price), type }
+    const newProduct: Product = { name, price: parseFloat(price), type }
     onProductCreated(newProduct)
     setName('')
     setPrice('')
