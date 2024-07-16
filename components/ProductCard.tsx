@@ -1,7 +1,14 @@
 "use client"
 import Image from 'next/image'
 
-export default function ProductCard({ product }) {
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+}
+
+export default function ProductCard({ product }: { product: Product }) {
   const handleBuy = async () => {
     alert(`Purchasing ${product.name} for $${product.price}`)
   }

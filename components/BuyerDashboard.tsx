@@ -2,8 +2,16 @@
 import { useState, useEffect } from 'react'
 import ProductCard from './ProductCard'
 
+// Определите интерфейс для продукта
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+}
+
 export default function BuyerDashboard() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
     // Имитация загрузки продуктов
