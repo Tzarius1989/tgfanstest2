@@ -1,16 +1,24 @@
-import Head from 'next/head'
+import './styles/globals.css'
+import { CartProvider } from '../contexts/CartContext'
+import { useEffect } from 'react'
+import { WebApp } from '@twa-dev/sdk'
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  useEffect(() => {
+    WebApp.ready()
+  }, [])
+
   return (
     <html lang="en">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <body>{children}</body>
+      <body>
+        <CartProvider>
+          {children}
+        </CartProvider>
+      </body>
     </html>
   )
 }
