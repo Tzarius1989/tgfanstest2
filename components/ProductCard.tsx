@@ -1,35 +1,35 @@
-"use client"
-import Image from 'next/image'
+import React, { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext';
+import { createInvoice, requestPayment } from '../utils/telegramPayment';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  type: string;
-}
+export default function ProductCard({ product }) {
+  const { addToCart } = useContext(CartContext);
 
-export default function ProductCard({ product }: { product: Product }) {
-  const handleBuy = async () => {
-    alert(`Purchasing ${product.name} for $${product.price}`)
-  }
+  const handlePurchase = () => {
+    const invoice = createInvoice(product);
+    requestPayment(invoice);
+  };
 
   return (
-    <div className="border rounded p-4 flex flex-col items-center">
-      <Image
-        src={`https://via.placeholder.com/150?text=${product.name}`}
-        alt={product.name}
-        width={150}
-        height={150}
-        className="mb-2 w-full h-auto"
-      />
-      <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-      <p className="mb-4">${product.price.toFixed(2)}</p>
-      <button
-        onClick={handleBuy}
-        className="mt-auto w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Buy Now
-      </button>
+    <div className="bg-white shadow-md rounded-lg p-4 m-2">
+      <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded" />
+      <h2 className="text-xl font-bold mb-2">{product.name}</h2>
+      <p className="text-gray-600 mb-2">{product.description}</p>
+      <p className="text-lg font-semibold mb-4">${product.price.toFixed(2)}</p>
+      <div className="flex justify-between">
+        <button
+          onClick={() => addToCart(product)}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Добавить в корзину
+        </button>
+        <button
+          onClick={handlePurchase}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        >
+          Купить за Stars
+        </button>
+      </div>
     </div>
-  )
+  );
 }
